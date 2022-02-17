@@ -1,11 +1,24 @@
+import { useState } from "react"
+
 import { Row } from "./Row"
 import { data } from "../todos"
 
+
+// Create todos type and use the static data as initial value to the state.
+
+type Todo = {
+    id: string,
+    task: string,
+    isCompleted: boolean
+}
+
 export const Todos = () => {
-    console.log(data)
+    // data is expected to be of type -> array of Todos
+    const [todos, setTodos] = useState<Todo[]>(data)
+
   return (
     <section>
-        {data.map(d => <Row todo={d} />)}
+        {todos.map(d => <Row key={d.id} todo={d} />)}
     </section>
   )
 }
