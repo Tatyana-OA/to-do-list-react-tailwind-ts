@@ -82,6 +82,7 @@ const handleCheckTodo = (id:string) => {
         </p>
       )}
       {hasTodos && (
+
         <p className="font-medium italic">
           [{remainingTodos} of {todosLength}] todos remaining
         </p>

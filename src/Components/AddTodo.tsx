@@ -13,7 +13,7 @@ export const AddTodo = ({task, handleChange, handleSubmitTodo}: AddTodoProps) =>
     return (
         <form 
             onSubmit={handleSubmitTodo} 
-            className="flex flex-row justify-evenly mt-8 w-2/3">
+            className="flex flex-row justify-evenly w-10/12 lg:w-1/2 max-w-2x1 mt-6">
         <input 
             type="text" 
             name="task" 
