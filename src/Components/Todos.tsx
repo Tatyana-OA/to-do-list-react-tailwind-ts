@@ -20,6 +20,9 @@ export const Todos = () => {
     // data is expected to be of type -> array of Todos
     const [todos, setTodos] = useState<Todo[]>(data)
     const [task, setTask] = useState("")
+    const todosLength = todos.length
+    const hasTodos = todos.length > 0
+    const remainingTodos = todos.filter((todo) => !todo.isCompleted).length
 
     const handleAddTodo = (todo: Todo) => {
         const updatedTodos = [...todos, todo]
@@ -66,12 +69,23 @@ const handleCheckTodo = (id:string) => {
     setTodos(updatedTodos)
 }
   return (
-    <section>
+    <section className="w-10/12 lg:w-1/2 max-w-2x1 flex flex-col items-center">
         <AddTodo 
         handleChange={handleChange}
         handleSubmitTodo={handleSubmitTodo}
         task={task} />
+        <div className="h-10" />
         {todos.map(d => <Row key={d.id} todo={d} handleDeleteTodo={handleDeleteTodo} handleCheckTodo={handleCheckTodo}/>)}
+        {!hasTodos && (
+        <p className="mb-5 text-xl text-red-500 uppercase">
+          Please add a todo!
+        </p>
+      )}
+      {hasTodos && (
+        <p>
+          [{remainingTodos} of {todosLength}] todos remaining
+        </p>
+      )}
     </section>
   )
 }
