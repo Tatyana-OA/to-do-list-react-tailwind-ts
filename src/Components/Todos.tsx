@@ -16,9 +16,13 @@ export const Todos = () => {
     // data is expected to be of type -> array of Todos
     const [todos, setTodos] = useState<Todo[]>(data)
 
+const handleDeleteTodo = (id:string) => {
+    const updatedTodos = todos.filter((todo) => todo.id !=id);
+    setTodos(updatedTodos)
+}
   return (
     <section>
-        {todos.map(d => <Row key={d.id} todo={d} />)}
+        {todos.map(d => <Row key={d.id} todo={d} handleDeleteTodo={handleDeleteTodo}/>)}
     </section>
   )
 }
