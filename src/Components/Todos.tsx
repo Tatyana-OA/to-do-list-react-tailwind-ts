@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
+
+import { v4 as uuidv4 } from "uuid"
 
 import { Row } from "./Row"
 import { data } from "../todos"
+import { AddTodo } from './AddTodo';
+
 
 
 // Create todos type and use the static data as initial value to the state.
@@ -15,7 +19,30 @@ type Todo = {
 export const Todos = () => {
     // data is expected to be of type -> array of Todos
     const [todos, setTodos] = useState<Todo[]>(data)
+    const [task, setTask] = useState("")
 
+    const handleAddTodo = (todo: Todo) => {
+        const updatedTodos = [...todos, todo]
+        setTodos(updatedTodos)
+        setTask("")
+      }
+    
+      const handleChange = (e: ChangeEvent) => {
+        const { value } = e.target as HTMLInputElement
+        setTask(value)
+      }
+    
+      const handleSubmitTodo = (e: FormEvent) => {
+        e.preventDefault()
+    
+        const todo = {
+          id: uuidv4(),
+          task: task,
+          isCompleted: false,
+        }
+        task && handleAddTodo(todo)
+      }
+    
 
     //Deletion
 const handleDeleteTodo = (id:string) => {
@@ -40,6 +67,10 @@ const handleCheckTodo = (id:string) => {
 }
   return (
     <section>
+        <AddTodo 
+        handleChange={handleChange}
+        handleSubmitTodo={handleSubmitTodo}
+        task={task} />
         {todos.map(d => <Row key={d.id} todo={d} handleDeleteTodo={handleDeleteTodo} handleCheckTodo={handleCheckTodo}/>)}
     </section>
   )
