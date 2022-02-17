@@ -9,7 +9,7 @@ type TodoProps = {
 }
 
 
-const Row = ({todo: {task, isCompleted}}: TodoProps) => {
+export const Row = ({todo: {task, isCompleted}}: TodoProps) => {
   return (
     <div>
         <p>{task}</p>
@@ -18,5 +18,3 @@ const Row = ({todo: {task, isCompleted}}: TodoProps) => {
     </div>
   )
 }
-
-export default Row
